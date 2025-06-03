@@ -1,13 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/pdf-file.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Browser side PDF-Compressor</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF2Petite – Test Compressor</title>
+  <meta name="description" content="Test page for PDF2Petite. Drag & drop a PDF to see if this page is live." />
+  <style>
+    body {
+      margin: 0;
+      font-family: Nunito, sans-serif;
+      background: #F3E5FF;
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    #drop-zone {
+      margin: 1rem auto;
+      padding: 2rem;
+      border: 2px dashed #888;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 400px;
+      background: #fff;
+    }
+    #drop-zone p {
+      margin: 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>PDF2Petite – Test Compressor</h1>
+  <div id="drop-zone">
+    <p>Drag & drop a PDF here to test</p>
+    <input type="file" id="file-input" accept="application/pdf" />
+  </div>
+
+  <script>
+    // We’re not compressing yet—just confirming the file is live.
+    const input = document.getElementById('file-input');
+    const drop = document.getElementById('drop-zone');
+
+    drop.addEventListener('dragover', e => {
+      e.preventDefault();
+      drop.style.background = '#eee';
+    });
+    drop.addEventListener('dragleave', e => {
+      e.preventDefault();
+      drop.style.background = '#fff';
+    });
+    drop.addEventListener('drop', e => {
+      e.preventDefault();
+      drop.style.background = '#fff';
+      const file = e.dataTransfer.files[0];
+      if (file && file.type === 'application/pdf') {
+        alert(`PDF detected: "${file.name}" (${file.size} bytes).`);
+      }
+    });
+    input.addEventListener('change', evt => {
+      const file = evt.target.files[0];
+      if (file && file.type === 'application/pdf') {
+        alert(`PDF selected: "${file.name}" (${file.size} bytes).`);
+      }
+    });
+  </script>
+</body>
 </html>
